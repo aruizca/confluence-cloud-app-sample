@@ -1,0 +1,36 @@
+{
+    "key": "my-sample-app",
+    "name": "My Sample App",
+    "description": "My very first app",
+    "baseUrl": "{{localBaseUrl}}",
+    "authentication": {
+        "type": "jwt"
+    },
+    "lifecycle": {
+        "installed": "/installed"
+    },
+    "scopes": [
+        "READ", "WRITE", "DELETE", "ACT_AS_USER"
+    ],
+    "modules": {
+        "generalPages": [
+            {
+                "key": "hello-world-page-confluence",
+                "location": "system.header/left",
+                "name": {
+                    "value": "Hello World"
+                },
+                "url": "/hello-world",
+                "conditions": [{
+                    "condition": "user_is_logged_in"
+                }]
+            }
+        ],
+        "webhooks": [
+            {
+            "event": "page_moved",
+            "url": "/rest/my-sample-app/1/event/page_moved"
+            }
+        ]
+    }
+}
