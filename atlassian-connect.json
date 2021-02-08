@@ -10,7 +10,7 @@
         "installed": "/installed"
     },
     "scopes": [
-        "READ", "WRITE", "DELETE", "ACT_AS_USER"
+        "read", "write", "delete"
     ],
     "modules": {
         "generalPages": [

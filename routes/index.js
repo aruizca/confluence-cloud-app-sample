@@ -24,6 +24,7 @@ export default function routes(app, addon) {
     app.post(
         '/rest/my-sample-app/1/event/page_moved',
         addon.authenticate(),
+        addon.checkValidToken(),
         async (req, res) => {
             try {
                 console.log("page_moved triggered");
@@ -41,7 +42,8 @@ export default function routes(app, addon) {
                         "Content-Type": "application/json"
                     })
                 }, function (err, response, body) {
-                    console.log("Flag created as content property")
+                    console.log("Flag created as content property");
+                    return body;
                 });
 
                 res.status(200).send();
