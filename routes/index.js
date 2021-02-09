@@ -24,13 +24,15 @@ export default function routes(app, addon) {
     app.post(
         '/rest/my-sample-app/1/event/page_moved',
         addon.authenticate(),
-        addon.checkValidToken(),
         async (req, res) => {
             try {
                 console.log("page_moved triggered");
-                const httpClient = addon.httpClient(req);
+                const httpClient = addon.httpClient({
+                    clientKey: req.context.clientKey,
+                    userAccountId: req.context.userAccountId
+                });
 
-                const response = await httpClient.post({
+                httpClient.post({
                     url: `/rest/api/content/${req.body.page.id}/property`,
                     data: JSON.stringify({
                         "key": `${addon.key}-cp`,
@@ -38,6 +40,7 @@ export default function routes(app, addon) {
                             "flag": true
                         }
                     }),
+                    json: true,
                     headers: JSON.stringify({
                         "Content-Type": "application/json"
                     })
