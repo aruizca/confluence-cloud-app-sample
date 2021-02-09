@@ -27,12 +27,12 @@ export default function routes(app, addon) {
         async (req, res) => {
             try {
                 console.log("page_moved triggered");
-                const httpClient = addon.httpClient({
+                const httpClient = await addon.httpClient({
                     clientKey: req.context.clientKey,
                     userAccountId: req.context.userAccountId
                 });
 
-                httpClient.post({
+                await httpClient.post({
                     url: `/rest/api/content/${req.body.page.id}/property`,
                     data: JSON.stringify({
                         "key": `${addon.key}-cp`,
