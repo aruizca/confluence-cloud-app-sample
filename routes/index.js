@@ -27,31 +27,23 @@ export default function routes(app, addon) {
         async (req, res) => {
             try {
                 console.log("page_moved triggered");
-                const httpClient = await addon.httpClient({
-                    clientKey: req.context.clientKey,
-                    userAccountId: req.context.userAccountId
-                });
+                const httpClient = addon.httpClient(req);
 
                 await httpClient.post({
                     url: `/rest/api/content/${req.body.page.id}/property`,
-                    data: JSON.stringify({
-                        "key": `${addon.key}-cp`,
-                        "value": {
-                            "flag": true
-                        }
+                    body: JSON.stringify({
+                        "key": `${addon.key}-flag`,
+                        "value": true
                     }),
-                    json: true,
-                    headers: JSON.stringify({
-                        "Content-Type": "application/json"
-                    })
-                }, function (err, response, body) {
-                    console.log("Flag created as content property");
-                    return body;
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
                 });
 
                 res.status(200).send();
-            } catch ({message}) {
-                res.status(500).send(message);
+            } catch (error) {
+                console.error(e);
+                res.status(500).send(e.message);
             }
         }
     );
