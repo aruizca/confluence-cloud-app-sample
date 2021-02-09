@@ -1,4 +1,5 @@
 // Entry point for the app
+require('dotenv').config();
 
 // Express is the underlying that atlassian-connect-express uses:
 // https://expressjs.com
