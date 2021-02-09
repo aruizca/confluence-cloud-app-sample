@@ -27,8 +27,9 @@ export default function routes(app, addon) {
         async (req, res) => {
             try {
                 console.log("page_moved triggered");
-                const httpClient = addon.httpClient(req);
 
+                const httpClient = addon.httpClient(req);
+                // Add a flag as content property
                 await httpClient.post({
                     url: `/rest/api/content/${req.body.page.id}/property`,
                     body: JSON.stringify({

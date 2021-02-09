@@ -1,0 +1,26 @@
+{
+  "env": {
+    "commonjs": true,
+    "es6": true
+  },
+  "extends": [
+    "prettier",
+    "plugin:prettier/recommended"
+  ],
+  "globals": {
+    "confluenceClient": "readonly",
+    "testSpaceKey": "readonly",
+    "createSpaces": "readonly",
+    "removeSpaces": "readonly"
+  },
+  "parserOptions": {
+    "ecmaVersion": 2018
+  },
+  "plugins": [
+    "jest",
+    "prettier"
+  ],
+  "rules": {
+    "prettier/prettier": "error"
+  }
+}
