@@ -49,7 +49,7 @@
             "adapter": "sequelize",
             "dialect": "sqlite",
             "logging": false,
-            "storage": "./developemnt.sqlite"
+            "storage": "./development.sqlite"
         }
     },
     // Configuration for production, which is enabled by setting

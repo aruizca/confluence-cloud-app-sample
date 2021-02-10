@@ -30,10 +30,13 @@ moved.
 
 **Automatic Tests**
 
-This webhook is used by a test suite we have created to automatically verify whether that flag is being created or not
+This webhook is used by a suite of integration tests we have created to automatically verify whether that flag is being 
+created or not
 in different scenarios. It can be found at: `/src/test/integration/002.pageMovedWebhookBug.test.js`
 
 Only 1 out of the 3 tests pass successfully. We consider that the three of them should pass.
+
+⚠️ Please note the app must be running before executing the automatic tests
 
 ### 2. content property removal not carried over by copy-single-page API
 
@@ -77,3 +80,12 @@ npm start:dev
 ```
 
 Now the app can be installed in your Confluence Cloud instance.
+
+## Running all the automatic tests
+
+- First you need to run the app following previosu steps
+- After that just run:
+
+```shell
+npm run test:integration
+```
