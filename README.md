@@ -10,8 +10,7 @@ Next are the bugs we have discovered on Confluence Cloud:
 
 **Description**
 
-When a page that sits on the Space root hierarchical level is moved as children of any other page, the page_moved
-webhook is not triggered.
+When a page is moved to or from the Space Root content hierarchy, the page_moved webhook is not triggered.
 
 **Steps to reproduce**
 
@@ -20,19 +19,19 @@ moved.
 
 - Install this sample app in your Confluence instance
 - Create a space
-- Create a page and put it on root level
-- Move the page as children of the space homepage
-- The content property `my-sample-app-flag` with value true is not created.
+- Create a page under the Space Homepage
+- Move the page to Space Root
+- The content property `my-sample-app-flag` with value true is not created because _page_moved_ webhooks is not 
+  triggered.
 
 **Expected result**
 
-- The content property `my-sample-app-flag` with value true is creted in the moved page.
+- The content property `my-sample-app-flag` with value true is created in the moved page.
 
 **Automatic Tests**
 
-This webhook is used by a suite of integration tests we have created to automatically verify whether that flag is being 
-created or not
-in different scenarios. It can be found at: `/src/test/integration/002.pageMovedWebhookBug.test.js`
+This webhook is used by a suite of integration tests we have created to automatically verify whether that flag is being
+created or not in different scenarios. It can be found at: `/src/test/integration/002.pageMovedWebhookBug.test.js`
 
 Only 1 out of the 3 tests pass successfully. We consider that the three of them should pass.
 

@@ -5,7 +5,7 @@ const createPageUnderSpaceHomepage = (title, spaceKey) => _createContent(title, 
 const createPageUnderSpaceRoot = (title, spaceKey) => _createContent(title, spaceKey)
 
 const _createContent = (title, spaceKey, {ancestors = []} = []) =>
-    confluence.createContent(
+    confluenceClient.createContent(
         {
             title,
             type: 'page',

@@ -21,7 +21,7 @@ class ConfluenceEnvironment extends NodeEnvironment {
     const confluenceClient = new ConfluenceWrapper(httpClient);
 
     // Setup global environment
-    this.global.confluence = confluenceClient;
+    this.global.confluenceClient = confluenceClient;
 
     this.global.sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
