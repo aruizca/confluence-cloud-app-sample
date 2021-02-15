@@ -21,6 +21,35 @@ const _createContent = (title, spaceKey, {ancestors = []} = []) =>
             ancestors
         },
         {expand: ['ancestors']}
-    )
+    );
 
-module.exports = { createPageUnderSpaceHomepage, createPageUnderSpaceRoot }
+const ENUM_COPY_PAGE_DESTINATION = {
+    SPACE: 'space',
+    EXISTING_PAGE: 'existing_page',
+    PARENT_PAGE: 'parent_page',
+};
+
+const COPY_PAGE_PARAMS = {
+    copyCustomContents: false,
+    copyAttachments: true,
+    copyLabels: true,
+    copyProperties: true,
+    destination: {
+        type: ENUM_COPY_PAGE_DESTINATION.SPACE,
+        value: '',
+    },
+    pageTitle: undefined,
+    body: {
+        storage: {
+            value: '',
+            representation: 'storage',
+        },
+    },
+};
+
+module.exports = {
+    createPageUnderSpaceHomepage,
+    createPageUnderSpaceRoot,
+    COPY_PAGE_PARAMS,
+    ENUM_COPY_PAGE_DESTINATION
+}

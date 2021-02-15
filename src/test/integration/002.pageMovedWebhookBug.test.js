@@ -1,8 +1,8 @@
 const { createPageUnderSpaceRoot, createPageUnderSpaceHomepage } = require('../helper/confluenceHelper');
 
 describe('Step to reproduce bug in moving content REST endpoint', () => {
-  beforeEach(createSpaces);
-  afterEach(removeSpaces);
+  beforeEach(createTestSpace);
+  afterEach(removeTestSpace);
 
   test('Case 1: When moving a page that sits under the space homepage as child of a page that also seats under the space homepage,' +
       ' the page_moved webhook should be triggered to add a content property flag', async () => {

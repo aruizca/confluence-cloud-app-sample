@@ -1,6 +1,6 @@
 describe('Initial checks', () => {
-  beforeEach(createSpaces);
-  afterEach(removeSpaces);
+  beforeEach(createTestSpace);
+  afterEach(removeTestSpace);
 
   test('It should see the test space', async () => {
     const { id } = await confluenceClient.getSpace(testSpaceKey);

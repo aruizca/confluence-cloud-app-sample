@@ -25,7 +25,7 @@ class ConfluenceEnvironment extends NodeEnvironment {
 
     this.global.sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
-    this.global.createSpaces = () => {
+    this.global.createTestSpace = () => {
       const testSpaceKey = getRandomString().toUpperCase();
 
       this.global.testSpaceKey = testSpaceKey;
@@ -37,8 +37,29 @@ class ConfluenceEnvironment extends NodeEnvironment {
       ]);
     };
 
-    this.global.removeSpaces = () =>
+    this.global.removeTestSpace = () =>
       Promise.all([confluenceClient.deleteSpace(this.global.testSpaceKey)]);
+
+    this.global.createTestSpaces = () => {
+      const sourceSpaceKey = getRandomString().toUpperCase();
+      const targetSpaceKey = getRandomString().toUpperCase();
+
+      this.global.sourceSpaceKey = sourceSpaceKey;
+      this.global.targetSpaceKey = targetSpaceKey;
+      return Promise.all([
+        confluenceClient.createSpace({
+          key: sourceSpaceKey,
+          name: `${sourceSpaceKey} Source Test Space`,
+        }),
+        confluenceClient.createSpace({
+          key: targetSpaceKey,
+          name: `${targetSpaceKey} Target Test Space`,
+        }),
+      ]);
+    };
+
+    this.global.removeTestSpaces = () =>
+        Promise.all([confluenceClient.deleteSpace(this.global.sourceSpaceKey), confluenceClient.deleteSpace(this.global.targetSpaceKey)]);
   }
 }
 

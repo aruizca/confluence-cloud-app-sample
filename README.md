@@ -21,7 +21,7 @@ moved.
 - Create a space
 - Create a page under the Space Homepage
 - Move the page to Space Root
-- The content property `my-sample-app-flag` with value true is not created because _page_moved_ webhooks is not 
+- The content property `my-sample-app-flag` with value true is not created because _page_moved_ webhooks is not
   triggered.
 
 **Expected result**
@@ -37,7 +37,38 @@ Only 1 out of the 3 tests pass successfully. We consider that the three of them 
 
 ⚠️ Please note the app must be running before executing the automatic tests
 
-### 2. content property removal not carried over by copy-single-page API
+### 2. content property removal not reflected by copy-single-page API when updating a page
+
+**Description**
+
+When using the [Copy Single Page REST API endpoint](https://developer.atlassian.
+com/cloud/confluence/rest/api-group-content---children-and-descendants/#api-api-content-id-copy-post) to create and
+update a page (target page) from an already existing page (source page), the API takes care of coping over all the page
+contents (attachments, content properties, custom content types, ...)
+
+This is the case for instance when a content property is added or updated in the source page, which will be copied
+across to the target page when using this API.
+
+The only exception is when a content property or a custom content type is deleted in the source page. Those kind of
+changes won't be reflected on the target page after using the copy-dingle-page endpoint and we consider that a bug.
+
+**Steps to reproduce**
+
+- Create pageA as source page
+- Add a content property to pageA with key `foo` and value `bar`  
+- Using the copy-single-page API, copy pageA to another space to create the target page
+- target page A will contain the content property with key `foo` and value `bar`
+- Remove content property `foo` from source pageA
+- Using the copy-single-page API, copy source pageA again on target pageA to update
+- Content property `foo` is still available on target pageA
+
+We have included an integration test `003.copyPageBug.test.js` in this repository to help reproduce the issue.
+
+No need to install the sample app to run. 
+
+**Expected result**
+
+- Content property `foo` is automatically removed from target pageA
 
 ## Setting up the app backend
 
