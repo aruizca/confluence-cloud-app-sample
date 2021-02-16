@@ -37,12 +37,11 @@ Only 1 out of the 3 tests pass successfully. We consider that the three of them 
 
 ⚠️ Please note the app must be running before executing the automatic tests
 
-### 2. content property removal not reflected by copy-single-page API when updating a page
+### 2. contents removal not reflected by copy-single-page API when updating a page
 
 **Description**
 
-When using the [Copy Single Page REST API endpoint](https://developer.atlassian.
-com/cloud/confluence/rest/api-group-content---children-and-descendants/#api-api-content-id-copy-post) to create and
+When using the [Copy Single Page REST API endpoint](https://developer.atlassian.com/cloud/confluence/rest/api-group-content---children-and-descendants/#api-api-content-id-copy-post) to create and
 update a page (target page) from an already existing page (source page), the API takes care of coping over all the page
 contents (attachments, content properties, custom content types, ...)
 
@@ -64,7 +63,7 @@ changes won't be reflected on the target page after using the copy-dingle-page e
 
 We have included an integration test `003.copyPageBug.test.js` in this repository to help reproduce the issue.
 
-No need to install the sample app to run. 
+No need to install the sample app to run the test. 
 
 **Expected result**
 
