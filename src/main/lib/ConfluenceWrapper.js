@@ -56,6 +56,35 @@ class ConfluenceWrapper {
         }, options));
     }
 
+    setContent(id, data, options={}) {
+        const retrials = 2;
+        return this.getContentById(id, { expand: ['version']}, options).then(content => {
+            if (content) {
+                const augmentedData = Object.assign(
+                    {
+                        type: content.type,
+                        title: content.title,
+                        version: {
+                            number: content.version.number + 1,
+                        },
+                    },
+                    data
+                );
+                return this.updateContent(id, augmentedData, options)
+                    .catch(error => {
+                        if (error.status === 409 && retrials > 0) {
+                            // Version didn't match expected value: transaction error => retry
+                            console.warn(`Retrying setContent (409 received), ${retrials} tries left`);
+                            return this.setContent(id, data, Object.assign({}, options, { retrials: retrials - 1 }));
+                        }
+                        throw error;
+                    });
+            } else {
+                return this.createContent(data, options);
+            }
+        });
+    }
+
     /**
      *
      * @param id(Required) - The ID of the page to be moved
